@@ -1,40 +1,77 @@
-<audio id="audio" src="beep-07.wav" autostart="false" ></audio>
-<a id="play_audio"> Play</a>
-<div id="demo"></div>
-<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" typle="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<style>
+ body{
+     background-color:black;
+     
+ }
+ div {
+     margin:0 auto;
+     margin-top:40px;
+     
+ }
+ button {
+     border-style:solid;
+     border-color:grey!important;
+     border-radius:0%!important;
+     background-image:url('button.jpg')!important;
+     color:#FFFFFF!important;
+     
+ }
+ h1 {
+     font-size:200px!important;
+     
+ }
+</style>
+</head>
+<body>
+<div class="text-center">
+<button id="play_audio"><h2> start</h2></button>
+<h1 id="demo"></h1>
+</div>
 <script>
- $('#play_audio').click(function(){ 
-	var d =0;
-     var minutes = Math.floor(d/ 60);
-     var secs = d % 60;
-  	var myVar = setInterval(myTimer, 1000);
-	function myTimer(){
-	    document.getElementById("demo").innerHTML = minutes + ":"+ d;
-	    if (d == 30 * 60||d == 60*60){
-		var audio = document.createElement("audio");
-		    audio.src = "beep-07.wav";
-		    audio.play();
-	    } else if (d == 90 * 60){
-		var times = 4;
-		var loop = setInterval(repeat, 500);
-		function repeat() {
-		    times--;
-		    if (times === 0) {
-			clearInterval(loop);
+ $('#play_audio').click(function() { 
+     var sec = 0;
+     var min = 90;
+     var myVar = setInterval(myTimer, 1000);
+     function myTimer(){
+	 document.getElementById("demo").innerHTML = min + ":"+ sec;
+	 if (sec == 60){
+	     min++;
+	     sec = 0;
+	     
+	 }
+	 if ((sec == 0 && min == 25)||(sec == 0 && min == 55)) {
+	     var audio = document.createElement("audio");
+	     audio.src = "beep-07.wav";
+	     audio.play();
+	     
+	 } else if (min == 90 && sec == 0) {
+	     var times = 4;
+	     var loop = setInterval(repeat, 500);
+	     function repeat() {
+		 times--;
+		 if (times == 0) {
+		     clearInterval(loop);
 
-		    }
-		    var audio = document.createElement("audio");
-		    audio.src = "beep-07.wav";
-		    audio.play();
+		 }
+		 var audio = document.createElement("audio");
+		 audio.src = "beep-07.wav";
+		 audio.play();
 
-		}
-		repeat();
+	     }
+	     repeat();
 
-
-		
-	    }
-	    d++;    
-	    }
-         
-});
+	 }
+	 sec++;
+	 
+     }
+     
+ });
+ 
 </script>
+</body>
+</html>
