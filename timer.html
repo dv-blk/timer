@@ -1,0 +1,40 @@
+<audio id="audio" src="beep-07.wav" autostart="false" ></audio>
+<a id="play_audio"> Play</a>
+<div id="demo"></div>
+<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
+<script>
+ $('#play_audio').click(function(){ 
+	var d =0;
+     var minutes = Math.floor(d/ 60);
+     var secs = d % 60;
+  	var myVar = setInterval(myTimer, 1000);
+	function myTimer(){
+	    document.getElementById("demo").innerHTML = minutes + ":"+ d;
+	    if (d == 30 * 60||d == 60*60){
+		var audio = document.createElement("audio");
+		    audio.src = "beep-07.wav";
+		    audio.play();
+	    } else if (d == 90 * 60){
+		var times = 4;
+		var loop = setInterval(repeat, 500);
+		function repeat() {
+		    times--;
+		    if (times === 0) {
+			clearInterval(loop);
+
+		    }
+		    var audio = document.createElement("audio");
+		    audio.src = "beep-07.wav";
+		    audio.play();
+
+		}
+		repeat();
+
+
+		
+	    }
+	    d++;    
+	    }
+         
+});
+</script>
