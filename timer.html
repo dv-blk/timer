@@ -25,51 +25,73 @@
      font-size:200px!important;
      
  }
+ #reset {
+     height:70px;
+     margin-left:20px;
+     border-radius:50%!important;
+     
+ }
 </style>
 </head>
 <body>
 <div class="text-center">
-<button id="play_audio"><h2> start</h2></button>
+<button id="start"><h2>start</h2></button>
+<button id="reset"><h2>reset</h2></button>
 <h1 id="demo"></h1>
 </div>
 <script>
- $('#play_audio').click(timer);
- function timer() { 
-     var sec = 0;
-     var min = 0;
-     var myVar = setInterval(myTimer, 1000);
-     function myTimer(){
-	 document.getElementById("demo").innerHTML = min + ":"+ sec;
-	 if (sec == 60){
-	     min++;
-	     sec = 0;
-	     
-	 }
-	 if ((sec == 0 && min == 25)||(sec == 0 && min == 55)) {
-	     var audio = document.createElement("audio");
-	     audio.src = "beep-07.wav";
-	     audio.play();
-	     
-	 } else if (min == 90 && sec == 0) {
-	     var times = 4;
-	     var loop = setInterval(repeat, 500);
-	     function repeat() {
-		 times--;
-		 if (times == 0) {
-		     clearInterval(loop);
-
-		 }
+ var __start = true; 
+ var __reset = false;
+ var sec = 0;
+ var min = 0;
+ $('#reset').click(function(){
+     __reset = true; 
+     sec = 0;
+     min = 0;
+     document.getElementById("demo").innerHTML = min + ":"+ sec;
+ });
+ $('#start').click(function() { 
+     __reset  = false;
+     if (__start){
+	 var myVar = setInterval(myTimer, 1000);
+	 function myTimer(){
+	     if (__reset){
+		 return;
+	     }
+	     document.getElementById("demo").innerHTML = min + ":"+ sec;
+	     if (sec == 60){
+		 min++;
+		 sec = 0;
+		 
+	     }
+	     if ((sec == 0 && min == 25)||(sec == 0 && min == 55)) {
 		 var audio = document.createElement("audio");
 		 audio.src = "beep-07.wav";
 		 audio.play();
+		 
+	     } else if (min == 90 && sec == 0) {
+		 var times = 4;
+		 var loop = setInterval(repeat, 500);
+		 function repeat() {
+		     times--;
+		     if (times == 0) {
+			 clearInterval(loop);
+
+		     }
+		     var audio = document.createElement("audio");
+		     audio.src = "beep-07.wav";
+		     audio.play();
+
+		 }
+		 repeat();
 
 	     }
-	     repeat();
-
+	     sec++;
+	     
 	 }
-	 sec++;
-	 
+
      }
+     __start = false;
      
  }
  
