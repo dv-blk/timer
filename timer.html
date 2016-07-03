@@ -33,7 +33,8 @@
 <h1 id="demo"></h1>
 </div>
 <script>
- $('#play_audio').click(function() { 
+ $('#play_audio').click(timer);
+ function timer() { 
      var sec = 0;
      var min = 0;
      var myVar = setInterval(myTimer, 1000);
@@ -70,7 +71,7 @@
 	 
      }
      
- });
+ }
  
 </script>
 </body>
